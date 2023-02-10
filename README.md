@@ -1,6 +1,6 @@
 # CMPS 2200  Recitation 02
 
-**Name (Team Member 1):**_________________________  
+**Name (Team Member 1):**_____Jiayi xu____________  
 **Name (Team Member 2):**_________________________
 
 In this recitation, we will investigate recurrences. 
@@ -50,10 +50,44 @@ where $W(1) = 1$.
 
 **TODO: your answer goes here**
 
+Let's choose $a=2$ and $b=2$, then: 
+
+For $f(n)=1$, it's leaf dominated and $O(n)=n$. We take input(10,20,40,80,160,320,640), we get results(15,31,63,127,255,511,1023), it is linear, so my prediction it correct.
+
+For $f(n)=\log n$, it's leaf dominated and $O(n)=n$.We take input(10,20,40,80,160,320,640), results are (19.9,44.2,93.8,193.9,395.2,798.8,1607.0), it is approximately linear, so it match my derivation.
+
+For $f(n)=n$, it's balanced and $O(n)=n\log n$. We take input(10,20,40,80,160,320,640), results(36,92,224,528,1216,2752,6144), after calcuating, it's similar to $n\log n$.
+
+
+
+
 - [ ] 5. (4 points) Now that you have a nice way to empirically generate valuess of $W(n)$, we can look at the relationship between $a$, $b$, and $f(n)$. Suppose that $f(n) = n^c$. What is the asypmptotic behavior of $W(n)$ if $c < \log_b a$? What about $c > \log_b a$? And if they are equal? Modify `compare_work` to compare empirical values for different work functions (at several different values of $n$) to justify your answer. 
 
 **TODO: your answer goes here**
 
+When $c > \log_b a$, it's root dominated and the asypmtotic behavior of $W(n)$ would be $O(n^c)$. When $c < \log_b a$, it's leaf dominated and leaves number is $a^{\log_b n}=n^{\log_b a}$ and the asypmtotic behavior of $W(n)$ would be $O(n^{\log_b a})$.
+
+Take $a=4$,$b=2$,$c=1$, as W_1, it's in situation $c < \log_b a$, and take $a=4$,$b=2$,$c=3$, as W_2, it's in situation $c > \log_b a$, we get results as following:
+|   n |    W_1 |       W_2 |
+|-----|--------|-----------|
+|  10 |    126 |      1692 |
+|  20 |    524 |     14768 |
+|  40 |   2136 |    123072 |
+|  80 |   8624 |   1004288 |
+| 160 |  34656 |   8113152 |
+| 320 | 138944 |  65220608 |
+| 640 | 556416 | 523026432 |
+
+For W_1, everytime n times by 2, results approximately times by 4. It meets my prediction of $O(n^{\log_b a})$, which is $O(n^2)$ in the case. For W_2, inputs and results are in a relationship of $n^x$, where x is a number between 3.1 and 3.2, which is also close to my prediction of $O(n^c)$.
+
 - [ ] 6. (3 points) $W(n)$ is meant to represent the running time of some recursive algorithm. Suppose we always had $a$ processors available to us and we wanted to compute the span of the same algorithm. Implement the function `span_calc` to compute the empirical span, where the work of the algorithm is given by $W(n)$. Implement `test_compare_span` to create a new comparison function for comparing span functions. Derive the asymptotic expressions for the span of the recurrences you used in problem 4 above. Confirm that everything matches up as it should. 
 
 **TODO: your answer goes here**
+
+Based on the condition in problem 4,
+
+For $f(n)=1$, span is $O(n)=\log n$. We take input(10,20,40,80,160,320,640), we get results(4,5,6,7,8,9,10), it is logarithmic, so it matches my derivation.
+
+For $f(n)=\log n$, span is $O(n)=\log^2 n$.We take input(10,20,40,80,160,320,640), results are (7.6,11.9,17.2,23.6,30.9,39.2,48.5), after calcuating, it's similar to $\log^2 n$.
+
+For $f(n)=n$, span is $O(n)=n\log n$. We take input(10,20,40,80,160,320,640), results(18,38,78,158,318,368,1278), after calcuating, it's similar to $n\log n$.
