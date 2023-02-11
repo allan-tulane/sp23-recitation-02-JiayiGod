@@ -55,15 +55,6 @@ def test_work():
 
 
 def compare_work(work_fn1,a1,b1,f1, work_fn2,a2,b2,f2, sizes=[10, 20, 50, 100, 1000, 5000, 10000]):
-    """
-    Compare the values of different recurrences for
-    given input sizes.
-
-    Returns:
-    A list of tuples of the form
-    (n, work_fn1(n), work_fn2(n), ...)
-
-    """
     result = []
     input_sizes=sizes
     for n in input_sizes:
@@ -84,19 +75,24 @@ def print_results(results):
 
 
 def test_compare_work():
-    res = compare_work(work_calc, work_calc,sizes=[10, 20, 40, 80,160, 320, 640])
+    res = compare_work(work_calc, 4,2,lambda n: n**1, work_calc, 4,2,lambda n: n**3,sizes=[10, 20, 40, 80,160, 320, 640])
     print(res)
 
-def test_compare_span(a1,b1,f1,a2,b2,f2,sizes=[10, 20, 40, 80,160, 320, 640]):
+def compare_span(span_fn1,a1,b1,f1,span_fn2,a2,b2,f2,sizes=[10, 20, 40, 80,160, 320, 640]):
     results = []
     for n in sizes:
         results.append((
             n,
-            span_calc(n, a1,b1,f1),
-            span_calc(n, a2,b2,f2)
+            span_fn1(n, a1,b1,f1),
+            span_fn2(n, a2,b2,f2)
         ))
     return results
 
+def test_compare_span():
+    res = compare_span(span_calc,2, 2, lambda n:1,span_calc,2, 2, lambda n: n,sizes=[10, 20, 40, 80,160, 320, 640])
+    print(res)
+
+
 # print_results(compare_work(work_calc, 4,2,lambda n: n**1, work_calc, 4,2,lambda n: n**3,sizes=[10, 20, 40, 80,160, 320, 640]))
-# print_results(test_compare_span(2, 2, lambda n:1, 2, 2, lambda n: n,sizes=[10, 20, 40, 80,160, 320, 640]))
+# print_results(compare_span(span_calc, 2, 2, lambda n:1, span_calc, 2, 2, lambda n: n,sizes=[10, 20, 40, 80,160, 320, 640]))
 # print_results(compare_work(work_calc, 2,2,lambda n: 1, work_calc, 2,2,lambda n: n,sizes=[10, 20, 40, 80,160, 320, 640]))
