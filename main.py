@@ -92,7 +92,6 @@ def test_compare_span():
     res = compare_span(span_calc,2, 2, lambda n:1,span_calc,2, 2, lambda n: n,sizes=[10, 20, 40, 80,160, 320, 640])
     print(res)
 
-
 # print_results(compare_work(work_calc, 4,2,lambda n: n**1, work_calc, 4,2,lambda n: n**3,sizes=[10, 20, 40, 80,160, 320, 640]))
 # print_results(compare_span(span_calc, 2, 2, lambda n:1, span_calc, 2, 2, lambda n: n,sizes=[10, 20, 40, 80,160, 320, 640]))
 # print_results(compare_work(work_calc, 2,2,lambda n: 1, work_calc, 2,2,lambda n: n,sizes=[10, 20, 40, 80,160, 320, 640]))
